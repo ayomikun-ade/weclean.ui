@@ -9,7 +9,7 @@ const Home = () => {
     //   </div>
     // </div>
     <>
-      <nav className="h-[8vh] px-10 bg-gray-100 flex items-center justify-between">
+      <nav className="h-[8vh] px-6 md:px-10 bg-gray-100 flex items-center justify-between">
         <div>
           <h2 className="text-blue-700 font-extrabold font-logo text-4xl">
             WeClean.
@@ -27,7 +27,7 @@ const Home = () => {
         </div>
       </nav>
       {/* <div className=" relative"> */}
-      <header className="px-8 bg-hero-pattern bg-cover bg-center bg-no-repeat h-[80vh] mb-0">
+      <header className="px-4 md:px-8 bg-hero-pattern bg-cover bg-center bg-no-repeat h-[80vh] mb-0">
         <div className="inset-6 flex flex-col h-full justify-center">
           <h3 className="shadow-sm text-5xl text-center font-hard text-white font-extrabold">
             Revitalize Your Space, Renew your energy.
@@ -45,9 +45,9 @@ const Home = () => {
         </div>
       </header>
       {/* </div> */}
-      <main className="px-16">
+      <main className="px-8 md:px-16">
         <div className="bg-white mt-1 mb-6 ">
-          <h3 className="text-blue-700 mt-10 font-hard text-3xl font-extrabold">
+          <h3 className="text-blue-700 mt-10 mb-3 font-hard text-3xl font-extrabold">
             WeClean
           </h3>
           <p className=" font-soft font-normal ">
@@ -62,7 +62,7 @@ const Home = () => {
           </p>
         </div>
         <div className="bg-white mb-12">
-          <h3 className="text-black mb-1 font-hard text-3xl font-extrabold">
+          <h3 className="text-blue-700 mb-3 font-hard text-3xl font-extrabold">
             Our Services
           </h3>
           <h4 className=" font-soft font-bold">One-Time Cleaning</h4>
