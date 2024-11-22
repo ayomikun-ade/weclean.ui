@@ -1,25 +1,34 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 const StaffLogin = () => {
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Hello World");
   };
   return (
-    <section className="relative bg-staff-pattern w-full h-screen bg-cover bg-no-repeat bg-center font-soft flex justify-center items-center">
-      <Link
-        to="/login"
-        className="absolute text-white text-sm px-2 py-1 rounded-lg bg-neutral-900 hover:bg-blue-600 top-4 right-8"
-      >
-        Customer Login
-      </Link>
-      <ToastContainer />
-      <div className="bg-neutral-900 px-8 py-5 rounded-lg shadow-lg">
+    <section className="relative bg-staff-pattern w-full h-screen bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center">
+      <nav className="flex font-soft bg-gray-100 w-full h-[7vh] items-center justify-between px-10 absolute top-0">
+        <h2
+          className="text-blue-700 font-extrabold font-logo text-4xl cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          WeClean.
+        </h2>
+        <Link
+          to="/login"
+          className="text-black text-sm font-semibold hover:underline"
+        >
+          Customer Login
+        </Link>
+      </nav>
+      <section className="font-soft bg-neutral-900 px-8 py-5 rounded-lg shadow-lg">
+        <ToastContainer />
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
-          <h2 className="text-center text-blue-700 font-hard font-bold text-2xl mb-1">
+          <h2 className="text-center text-blue-500 font-hard font-bold text-2xl mb-1">
             Staff Log In
           </h2>
           <hr className="mb-3" />
@@ -29,7 +38,7 @@ const StaffLogin = () => {
             </label>
             <input
               type="number"
-              className="border-2 px-3 py-1 rounded-lg outline-none placeholder:font-thin focus:border-blue-600"
+              className="border-2 px-3 py-1 rounded-sm outline-none placeholder:font-thin focus:border-blue-600"
               placeholder="Enter ID"
               name="id"
               id="id"
@@ -42,7 +51,7 @@ const StaffLogin = () => {
             </label>
             <input
               type="password"
-              className="border-2 px-3 py-1 rounded-lg outline-none placeholder:font-thin focus:border-blue-600"
+              className="border-2 px-3 py-1 rounded-sm outline-none placeholder:font-thin focus:border-blue-600"
               placeholder="Enter Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -53,18 +62,18 @@ const StaffLogin = () => {
           </div>
           <button
             type="submit"
-            className="bg-blue-700 hover:bg-blue-600 text-white px-3 py-1 rounded-lg w-fit mt-5"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-sm w-full md:w-fit mt-4"
           >
             Submit
           </button>
         </form>
-      </div>
-      <Link
-        to="/admin"
-        className="absolute text-black underline text-sm px-2 py-1 rounded-lg bottom-4 right-8"
-      >
-        Admin Login
-      </Link>
+        <Link
+          to="/admin"
+          className="absolute text-black underline text-sm px-2 py-1 rounded-sm bottom-4 right-8"
+        >
+          Admin Login
+        </Link>
+      </section>
     </section>
   );
 };
