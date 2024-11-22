@@ -1,17 +1,16 @@
 // import background from "../assets/back-red.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
-    // <div className="bg-hero-pattern bg-cover bg-no-repeat w-full h-screen">
-    //   <div>
-    //     <h1></h1>
-    //   </div>
-    // </div>
     <>
       <nav className="h-[8vh] px-6 md:px-10 bg-white flex items-center justify-between">
         <div>
-          <h2 className="text-blue-700 font-extrabold font-logo text-4xl">
+          <h2
+            className="text-blue-700 font-extrabold font-logo text-4xl cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             WeClean.
           </h2>
         </div>
