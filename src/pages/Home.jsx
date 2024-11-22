@@ -9,7 +9,7 @@ const Home = () => {
     //   </div>
     // </div>
     <>
-      <nav className="h-[8vh] px-6 md:px-10 bg-gray-100 flex items-center justify-between">
+      <nav className="h-[8vh] px-6 md:px-10 bg-white flex items-center justify-between">
         <div>
           <h2 className="text-blue-700 font-extrabold font-logo text-4xl">
             WeClean.
@@ -19,7 +19,7 @@ const Home = () => {
         <div className="flex items-center">
           <Link to="/login">
             <p className="text-black font-extrabold font-hard text-md hover:cursor-pointer">
-              Customer
+              Log In
             </p>
           </Link>
 
@@ -37,7 +37,7 @@ const Home = () => {
             Where cleanliness meets excellence.
           </h3>
           <Link
-            to=""
+            to="/signup"
             className="self-center bg-blue-700 text-white px-3 py-2 mt-3 font-soft rounded-lg hover:bg-blue-600"
           >
             Get Started
