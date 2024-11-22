@@ -11,7 +11,7 @@ const CustomerSignup = () => {
     e.preventDefault();
     if (password != confirmPassword) {
       console.error("No match");
-      toast.error("Passwords don't match!");
+      toast.error("Passwords don't match!", { theme: "dark" });
     }
   };
   return (
@@ -30,7 +30,7 @@ const CustomerSignup = () => {
               </label>
               <input
                 type="text"
-                className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin"
+                className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin focus:border-blue-600"
                 placeholder="Enter First Name"
                 name="fname"
                 id="fname"
@@ -43,7 +43,7 @@ const CustomerSignup = () => {
               </label>
               <input
                 type="text"
-                className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin"
+                className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin focus:border-blue-600"
                 placeholder="Enter Last Name"
                 name="lname"
                 id="lname"
@@ -58,7 +58,7 @@ const CustomerSignup = () => {
               </label>
               <input
                 type="email"
-                className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin"
+                className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin focus:border-blue-600"
                 placeholder="Enter Email"
                 name="email"
                 id="email"
@@ -71,7 +71,7 @@ const CustomerSignup = () => {
               </label>
               <input
                 type="text"
-                className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin"
+                className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin focus:border-blue-600"
                 placeholder="Enter Phone Number"
                 name="phone"
                 id="phone"
@@ -86,7 +86,7 @@ const CustomerSignup = () => {
               </label>
               <input
                 type="password"
-                className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin"
+                className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin focus:border-blue-600"
                 placeholder="Enter Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -101,7 +101,7 @@ const CustomerSignup = () => {
               </label>
               <input
                 type="password"
-                className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin"
+                className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin focus:border-blue-600"
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
