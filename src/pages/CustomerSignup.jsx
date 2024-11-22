@@ -23,7 +23,7 @@ const CustomerSignup = () => {
             Customer Sign Up
           </h2>
           <hr className="mb-3" />
-          <div className="flex gap-4">
+          <div className="md:flex gap-4">
             <div className="flex flex-col mb-3">
               <label htmlFor="fname" className="text-sm mb-1">
                 First Name:
@@ -51,7 +51,7 @@ const CustomerSignup = () => {
               />
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="md:flex gap-4">
             <div className="flex flex-col mb-3">
               <label htmlFor="email" className="text-sm mb-1">
                 Email Address:
@@ -79,7 +79,7 @@ const CustomerSignup = () => {
               />
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="md:flex gap-4">
             <div className="flex flex-col mb-3">
               <label htmlFor="password" className="text-sm mb-1">
                 Password:
