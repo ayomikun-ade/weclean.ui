@@ -11,7 +11,7 @@ const CustomerLogin = () => {
   };
   return (
     <section className="relative bg-hero-pattern w-full h-screen bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center">
-      <nav className="flex font-soft bg-white w-full h-[7vh] items-center justify-between px-10 absolute top-0">
+      <nav className="flex font-soft bg-white w-full h-[7vh] items-center justify-between px-6 md:px-10 absolute top-0">
         <h2
           className="text-blue-700 font-extrabold font-logo text-4xl cursor-pointer"
           onClick={() => navigate("/")}
