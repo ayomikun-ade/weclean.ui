@@ -94,6 +94,39 @@ const Home = () => {
             and folding.
           </h6>
         </div>
+
+        <div className="mb-6">
+          <h3 className="text-blue-700 mb-3 text-center font-hard text-3xl font-extrabold">
+            Contact Us
+          </h3>
+          <p className="text-center">
+            Do you have something to say to us?
+            <br /> Fill the form and we’ll get back to you as soon as possible
+          </p>
+          <form className="flex flex-col justify-center items-center mx-auto">
+            <div className="flex flex-col my-3">
+              <label htmlFor="email" className="text-sm mb-1">
+                Email Address:
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="border px-3 py-1 w-80 rounded-lg outline-none placeholder:font-thin focus:border-blue-600"
+              ></input>
+            </div>
+            <div className="flex flex-col mb-3">
+              <label htmlFor="email" className="text-sm mb-1">
+                Message:
+              </label>
+              <textarea
+                rows={5}
+                name="email"
+                id="email"
+                className="border px-3 py-1 w-80 rounded-lg outline-none placeholder:font-thin focus:border-blue-600"
+              ></textarea>
+            </div>
+          </form>
+        </div>
       </main>
 
       <footer className="h-[6vh] bg-black flex justify-center items-center">

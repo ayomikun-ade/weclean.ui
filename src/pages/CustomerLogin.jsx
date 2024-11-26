@@ -1,14 +1,34 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const CustomerLogin = () => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Hello World");
+
+    const values = {
+      email,
+      password,
+    };
+
+    try {
+      const res = await axios.post("http://localhost:8000/api/login", values);
+      console.log(res.data);
+      sessionStorage.setItem("email", res.data?.email);
+      if (res.status == 200) navigate("/dashboard");
+    } catch (error) {
+      console.error(`Error adding customer ${error}`);
+      if (error.response.status == 401)
+        toast.error("Invalid credentials", { theme: "dark" });
+    }
   };
+
   return (
     <section className="relative bg-hero-pattern w-full h-screen bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center">
       <nav className="flex font-soft bg-white w-full h-[7vh] items-center justify-between px-6 md:px-10 absolute top-0">
@@ -40,6 +60,8 @@ const CustomerLogin = () => {
               type="email"
               className="border px-3 py-1 rounded-lg outline-none placeholder:font-thin focus:border-blue-600"
               placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               name="email"
               id="email"
               required
