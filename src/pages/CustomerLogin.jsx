@@ -21,7 +21,7 @@ const CustomerLogin = () => {
       const res = await axios.post("http://localhost:8000/api/login", values);
       console.log(res.data);
       sessionStorage.setItem("email", res.data?.email);
-      if (res.status == 200) navigate("/dashboard");
+      if (res.status == 200) navigate("/customer/dashboard");
     } catch (error) {
       console.error(`Error adding customer ${error}`);
       if (error.response.status == 401)

@@ -36,7 +36,7 @@ const Home = () => {
             Where cleanliness meets excellence.
           </h3>
           <Link
-            to="/signup"
+            to="/account"
             className="self-center bg-blue-700 text-white px-3 py-2 mt-3 font-soft rounded-lg hover:bg-blue-600"
           >
             Get Started
