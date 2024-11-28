@@ -9,7 +9,9 @@ const CustomerDash = () => {
   return (
     <div className="grid grid-cols-4 gap-4 h-screen font-soft bg-slate-200">
       <section className="bg-blue-900 h-full py-4 px-6 col-span-1 flex flex-col justify-between rounded-sm">
-        <h1 className="font-logo text-5xl font-bold text-white">WeClean.</h1>
+        <h1 className="font-logo text-5xl font-bold text-white cursor-pointer">
+          WeClean.
+        </h1>
         <div className="flex flex-col gap-3">
           <Link
             to="/customer/dashboard"

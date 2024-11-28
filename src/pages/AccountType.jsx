@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AccountType = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex relative flex-col h-screen justify-center items-center font-soft bg-slate-300">
       <div className="bg-white px-8 py-8 rounded-lg shadow-md">
-        <h1 className=" text-5xl font-logo text-blue-700 font-bold text-center mb-8">
+        <h1
+          className=" text-5xl font-logo text-blue-700 font-bold text-center mb-8"
+          onClick={() => navigate("/")}
+        >
           WeClean.
         </h1>
         <h2 className="text-center text-2xl font-semibold mb-5">
