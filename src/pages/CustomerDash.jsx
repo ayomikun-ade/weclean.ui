@@ -12,7 +12,9 @@ import axios from "axios";
 const CustomerDash = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
+  const [services, setServices] = useState([]);
   const [values, setValues] = useState({
+    customer_id: "",
     date: "",
     time: "",
     service_name: "",
@@ -33,8 +35,28 @@ const CustomerDash = () => {
         console.error(error);
       }
     };
+
+    const getServiceDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/api/get-services`
+        );
+
+        setServices(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getServiceDetails();
     getUserData();
   }, []);
+
+  useEffect(() => {
+    if (userData && userData.id) {
+      setValues((prevValues) => ({ ...prevValues, customer_id: userData.id }));
+    }
+  }, [userData]);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -42,25 +64,43 @@ const CustomerDash = () => {
     toast.success("Logout Successful. Redirecting...", { theme: "dark" });
     setTimeout(() => {
       navigate("/");
-    }, [4000]);
+    }, [3000]);
   };
 
   const handleBooking = async (e) => {
     e.preventDefault();
 
-    console.log(values);
+    const selectedDate = new Date(values.date);
+    const today = new Date();
+    // Remove the time part of the date for comparison
+    selectedDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+    if (selectedDate < today) {
+      // Show an error message to the user
+      console.error("Selected date is in the past!");
+      toast.error("Please select a valid date that is not in the past.", {
+        theme: "dark",
+      });
+      return;
+    }
 
+    // console.log(values);
     try {
       const res = await axios.post(
         "http://localhost:8000/api/book-session",
         values
       );
       console.log(res.data);
-      if (res.status == 201) navigate("/login");
+      if (res.status == 201) {
+        toast.success("Session booked successfully!", { theme: "dark" });
+      }
+      setTimeout(() => {
+        navigate("/customer/sessions");
+      }, [2500]);
     } catch (error) {
-      console.error(`Error adding customer ${error}`);
-      if (error.response.status === 400)
-        toast.error("Email already in use!", { theme: "dark" });
+      console.error(`Error booking session ${error}`);
+      // if (error.response.status === 400)
+      toast.error("Error creating booking!", { theme: "dark" });
     }
   };
   return (
@@ -135,7 +175,7 @@ const CustomerDash = () => {
                 Service Option
               </label>
               <select
-                name="service"
+                name="service_name"
                 id="service"
                 onChange={(e) =>
                   setValues({ ...values, service_name: e.target.value })
@@ -143,15 +183,21 @@ const CustomerDash = () => {
                 className="bg-slate-100 rounded-md p-2 text-sm border-2 border-slate-100 focus:outline-none focus:border-2 focus:border-slate-500"
               >
                 <option value="" defaultValue>
-                  Select an option
+                  Select a service
                 </option>
+                {services.map((service, i) => (
+                  <option key={i} value={service.service_name}>
+                    {service.service_name} {"-"} N{service.price}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="flex flex-col mb-3 w-[80%]">
               <label className="font-semibold mb-2" htmlFor="location">
                 Location{" "}
                 <span className="font-light font-soft text-xs">
-                  *Detailed address of location including house number
+                  *Detailed address of location including house and street
+                  number
                 </span>
               </label>
               <textarea
