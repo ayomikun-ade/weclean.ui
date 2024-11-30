@@ -7,6 +7,7 @@ import AdminLogin from "./pages/AdminLogin";
 import CustomerDash from "./pages/CustomerDash";
 import CustomerSessions from "./pages/CustomerSessions";
 import AccountType from "./pages/AccountType";
+import StaffDash from "./pages/StaffDash";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/admin" element={<AdminLogin />}></Route>
         <Route path="/customer/dashboard" element={<CustomerDash />}></Route>
         <Route path="/customer/sessions" element={<CustomerSessions />}></Route>
+        <Route path="/staff/dashboard" element={<StaffDash />}></Route>
       </Routes>
     </BrowserRouter>
   );

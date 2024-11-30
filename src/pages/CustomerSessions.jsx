@@ -39,6 +39,15 @@ const CustomerDash = () => {
     getUserData();
   }, []);
 
+  const deleteAlert = (booking_id, e) => {
+    const confirmed = confirm("Are you sure you want to cancel the session?");
+    if (confirmed) {
+      deleteSession(booking_id, e);
+    } else {
+      return;
+    }
+  };
+
   const deleteSession = async (booking_id, e) => {
     e.preventDefault();
     try {
@@ -137,7 +146,7 @@ const CustomerDash = () => {
                   <button
                     className="flex items-center cursor-pointer hover:text-red-500"
                     disabled={session.session_status !== 0}
-                    onClick={(e) => deleteSession(session.booking_id, e)}
+                    onClick={(e) => deleteAlert(session.booking_id, e)}
                   >
                     {""}
                     Cancel
