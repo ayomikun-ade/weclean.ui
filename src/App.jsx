@@ -9,6 +9,10 @@ import CustomerSessions from "./pages/CustomerSessions";
 import AccountType from "./pages/AccountType";
 import StaffDash from "./pages/StaffDash";
 import StaffSessions from "./pages/StaffSessions";
+import AdminCustomers from "./pages/AdminCustomers";
+import AdminStaff from "./pages/AdminStaff";
+import AdminBookings from "./pages/AdminBookings";
+import AddStaff from "./pages/AddStaff";
 
 const App = () => {
   return (
@@ -24,6 +28,10 @@ const App = () => {
         <Route path="/customer/sessions" element={<CustomerSessions />}></Route>
         <Route path="/staff/dashboard" element={<StaffDash />}></Route>
         <Route path="/staff/sessions" element={<StaffSessions />}></Route>
+        <Route path="/admin/customers" element={<AdminCustomers />}></Route>
+        <Route path="/admin/staffs" element={<AdminStaff />}></Route>
+        <Route path="/admin/sessions" element={<AdminBookings />}></Route>
+        <Route path="/admin/add-staff" element={<AddStaff />}></Route>
       </Routes>
     </BrowserRouter>
   );

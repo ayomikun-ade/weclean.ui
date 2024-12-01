@@ -1,14 +1,37 @@
+import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const AdminLogin = () => {
   const [password, setPassword] = useState("");
+  const [id, setID] = useState("");
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Hello World");
+    const values = {
+      id,
+      password,
+    };
+    // console.log(values);
+
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/admin-login",
+        values
+      );
+      // console.log(res.data);
+      sessionStorage.setItem("admin-email", res.data?.email);
+      if (res.status == 200) navigate("/admin/customers");
+    } catch (error) {
+      console.error(`Error logging in ${error}`);
+      if (error.response.status == 401)
+        toast.error("Invalid credentials", { theme: "dark" });
+      else toast.error("Error! Try again");
+    }
   };
+
   return (
     <section className="relative bg-staff-pattern w-full h-screen bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center">
       <nav className="flex font-soft bg-gray-100 w-full h-[7vh] items-center justify-between px-6 md:px-10 absolute top-0">
@@ -40,6 +63,8 @@ const AdminLogin = () => {
               type="number"
               className="border-2 px-3 py-1 rounded-sm outline-none placeholder:font-thin focus:border-blue-600"
               placeholder="Enter ID"
+              value={id}
+              onChange={(e) => setID(e.target.value)}
               name="id"
               id="id"
               required

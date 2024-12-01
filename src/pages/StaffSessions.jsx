@@ -105,7 +105,7 @@ const StaffSessions = () => {
             </Link>
             <button className=" bg-white rounded-lg px-3 py-2 font-bold text-left flex gap-2 items-center">
               <IoCalendarOutline size="1.3em" />
-              View Sessions
+              My Sessions
             </button>
           </div>
           <button
@@ -122,7 +122,7 @@ const StaffSessions = () => {
             Staff Sessions for{" "}
             <span className="text-blue-700">{staffData.name}</span>
           </h3>
-          <div className="mt-5 bg-white rounded-lg shadow-lg py-8  h-[60vh] flex flex-col">
+          <div className="mt-5 bg-white rounded-lg shadow-lg py-8 px-3 h-[60vh] flex flex-col">
             <section>
               <div className="grid grid-cols-7 text-center font-bold mb-4 text-lg text-slate-700">
                 <p>Service</p>

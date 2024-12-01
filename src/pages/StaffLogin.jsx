@@ -91,12 +91,12 @@ const StaffLogin = () => {
             Submit
           </button>
         </form>
-        {/* <Link
+        <Link
           to="/admin"
           className="absolute text-black underline text-sm px-2 py-1 rounded-sm bottom-4 right-8"
         >
           Admin Login
-        </Link> */}
+        </Link>
       </section>
     </section>
   );
