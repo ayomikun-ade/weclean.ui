@@ -8,6 +8,7 @@ import CustomerDash from "./pages/CustomerDash";
 import CustomerSessions from "./pages/CustomerSessions";
 import AccountType from "./pages/AccountType";
 import StaffDash from "./pages/StaffDash";
+import StaffSessions from "./pages/StaffSessions";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/customer/dashboard" element={<CustomerDash />}></Route>
         <Route path="/customer/sessions" element={<CustomerSessions />}></Route>
         <Route path="/staff/dashboard" element={<StaffDash />}></Route>
+        <Route path="/staff/sessions" element={<StaffSessions />}></Route>
       </Routes>
     </BrowserRouter>
   );

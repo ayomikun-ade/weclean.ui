@@ -115,25 +115,27 @@ const CustomerDash = () => {
               {userData.fname} {userData.lname}
             </span>
           </h3>
-          <div className="mt-5 bg-white rounded-lg shadow-lg py-8  h-[60vh] flex flex-col">
+          <div className="mt-5 bg-white rounded-lg shadow-lg py-8 px-2 h-[60vh] flex flex-col">
             <section>
-              <div className="grid grid-cols-6 text-center font-bold mb-4 text-lg text-slate-700">
+              <div className="grid grid-cols-7 text-center font-bold mb-4 text-lg text-slate-700">
                 <p>Service Type</p>
                 <p>Booking Date</p>
                 <p>Booking Time</p>
                 <p>Session Location</p>
+                <p>Price</p>
                 <p>Status</p>
-                <p></p>
+                <p>Actions</p>
               </div>
               {userSessions.map((session, i) => (
                 <div
                   key={i}
-                  className="grid grid-cols-6 text-center mb-5 items-center"
+                  className="grid grid-cols-7 text-center mb-5 items-center"
                 >
-                  <p>{session.service_id}</p>
+                  <p>{session.service_name}</p>
                   <p>{new Date(session.booking_date).toLocaleDateString()}</p>
                   <p>{session.booking_time}</p>
                   <p>{session.location}</p>
+                  <p>N{session.price}</p>
                   <p
                     className={
                       session.session_status === 0
@@ -144,7 +146,9 @@ const CustomerDash = () => {
                     {session.session_status == 0 ? `Pending` : `Completed`}
                   </p>
                   <button
-                    className="flex items-center cursor-pointer hover:text-red-500"
+                    className={`flex items-center justify-center cursor-pointer hover:text-red-500 ${
+                      session.session_status !== 0 ? `hidden` : ``
+                    }`}
                     disabled={session.session_status !== 0}
                     onClick={(e) => deleteAlert(session.booking_id, e)}
                   >

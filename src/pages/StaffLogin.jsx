@@ -21,7 +21,7 @@ const StaffLogin = () => {
         "http://localhost:8000/api/staff-login",
         values
       );
-      console.log(res.data);
+      // console.log(res.data);
       sessionStorage.setItem("staff-email", res.data?.email);
       if (res.status == 200) navigate("/staff/dashboard");
     } catch (error) {

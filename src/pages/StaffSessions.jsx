@@ -2,21 +2,40 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import {
   IoCalendarOutline,
-  //   IoCloseSharp,
   IoLogOutOutline,
   IoTimeOutline,
 } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
-const StaffDash = () => {
-  const [sessions, setSessions] = useState([]);
+const StaffSessions = () => {
   const navigate = useNavigate();
+
+  const [userSessions, setUserSessions] = useState([]);
+
+  useEffect(() => {
+    const getStaffData = async () => {
+      try {
+        const email = sessionStorage.getItem("staff-email");
+        // console.log(email);
+        // Fetch staff sessions
+        const response = await axios.post(
+          `http://localhost:8000/api/get-staff-sessions`,
+          { email }
+        );
+        setUserSessions(response.data);
+        // console.log(userSessions);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getStaffData();
+  }, []);
 
   const [staffData, setStaffData] = useState({});
 
   useEffect(() => {
-    const getStaffData = async () => {
+    const getStaff = async () => {
       try {
         const email = sessionStorage.getItem("staff-email");
         // console.log(email);
@@ -25,62 +44,13 @@ const StaffDash = () => {
           { email }
         );
         // console.log(response.data);
-        setStaffData(response.data?.staff_id);
+        setStaffData(response.data);
       } catch (error) {
         console.error(error);
       }
     };
-    getStaffData();
+    getStaff();
   }, []);
-
-  useEffect(() => {
-    const getAllSessions = async () => {
-      try {
-        const res = await axios.get(
-          `http://localhost:8000/api/get-all-sessions`
-        );
-        // console.log(res.data);
-        setSessions(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getAllSessions();
-  }, []);
-
-  const acceptSession = async (booking_id, e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:8000/api/accept-session", {
-        id: booking_id,
-        staff_id: staffData,
-      });
-      console.log(res.data);
-      if (res.status == 200) {
-        toast.success("Session accepted successfully! Redirecting...", {
-          theme: "dark",
-        });
-      }
-      setTimeout(() => {
-        navigate("/staff/sessions");
-        // window.location.reload();
-      }, [2500]);
-    } catch (error) {
-      console.error(`Error booking session ${error}`);
-      // if (error.response.status === 400)
-      toast.error("Error accepting session! Try again", { theme: "dark" });
-    }
-  };
-
-  const acceptanceAlert = (booking_id, e) => {
-    const confirmed = confirm("Are you sure you want to accept this session?");
-    if (confirmed) {
-      acceptSession(booking_id, e);
-    } else {
-      return;
-    }
-  };
 
   const completeSession = async (booking_id, e) => {
     e.preventDefault();
@@ -117,7 +87,6 @@ const StaffDash = () => {
       navigate("/");
     }, [3000]);
   };
-
   return (
     <>
       <ToastContainer />
@@ -127,17 +96,17 @@ const StaffDash = () => {
             WeClean.
           </h1>
           <div className="flex flex-col gap-3">
-            <button className="bg-white rounded-lg px-3 py-2 font-bold text-left flex gap-2 items-center">
-              <IoTimeOutline size="1.3em" className="font-extrabold" />
-              All Customer Sessions
-            </button>
             <Link
-              to="/staff/sessions"
+              to="/staff/dashboard"
               className="text-white rounded-lg px-3 py-2 text-left flex gap-2 items-center"
             >
-              <IoCalendarOutline size="1.3em" />
-              My Sessions
+              <IoTimeOutline size="1.3em" className="font-extrabold" />
+              Book Session
             </Link>
+            <button className=" bg-white rounded-lg px-3 py-2 font-bold text-left flex gap-2 items-center">
+              <IoCalendarOutline size="1.3em" />
+              View Sessions
+            </button>
           </div>
           <button
             onClick={handleLogout}
@@ -148,22 +117,26 @@ const StaffDash = () => {
           </button>
         </section>
         <section className="col-span-3 py-4 px-4 w-full flex flex-col justify-center">
-          <h2 className="text-2xl font-semibold">Staff Dashboard - Bookings</h2>
-          <div className="mt-5 bg-white rounded-lg shadow-lg py-8 px-2  min-h-[60vh] flex flex-col">
+          {/* <h2 className="text-2xl font-semibold">Welcome, Ayomikun</h2> */}
+          <h3 className="text-3xl font-semibold my-5 self-start">
+            Staff Sessions for{" "}
+            <span className="text-blue-700">{staffData.name}</span>
+          </h3>
+          <div className="mt-5 bg-white rounded-lg shadow-lg py-8  h-[60vh] flex flex-col">
             <section>
-              <div className="grid grid-cols-6 text-center font-bold mb-4 text-lg text-slate-700">
+              <div className="grid grid-cols-7 text-center font-bold mb-4 text-lg text-slate-700">
                 <p>Service</p>
                 <p>Customer</p>
                 <p>Booking Details</p>
-                {/* <p>Booking Time</p> */}
                 <p>Location</p>
+                <p>Price</p>
                 <p>Status</p>
                 <p>Actions</p>
               </div>
-              {sessions.map((session, i) => (
+              {userSessions.map((session, i) => (
                 <div
                   key={i}
-                  className="grid grid-cols-6 text-center mb-7 items-center"
+                  className="grid grid-cols-7 text-center mb-7 items-center"
                 >
                   <p>{session.service_name}</p>
                   <p>
@@ -175,6 +148,7 @@ const StaffDash = () => {
                   </p>
                   {/* <p>{session.booking_time}</p> */}
                   <p>{session.location}</p>
+                  <p>N{session.price}</p>
                   <p
                     className={
                       session.acceptance_status === 0
@@ -184,7 +158,25 @@ const StaffDash = () => {
                   >
                     {session.acceptance_status == 0 ? `Available` : `Assigned`}
                   </p>
-                  <div className="flex flex-col gap-1 items-center">
+                  <div>
+                    <button
+                      className={`cursor-pointer text-sm underline hover:no-underline text-blue-500 ${
+                        session.acceptance_status !== 0
+                          ? // session.staff_id == staffData
+                            ""
+                          : "hidden cursor-not-allowed text-transparent bg-transparent"
+                      } ${session.session_status !== 0 ? "hidden" : ""}`}
+                      // disabled={session.acceptance_status !== 0}
+                      onClick={(e) => completeSession(session.booking_id, e)}
+                    >
+                      {""}
+                      Mark as Completed
+                    </button>
+                    <p className={`cursor-pointer font-semibold text-blue-500`}>
+                      {session.session_status == 0 ? `` : `Completed`}
+                    </p>
+                  </div>
+                  {/* <div className="flex flex-col gap-1 items-center">
                     <button
                       className={`flex items-center cursor-pointer bg-green-600 rounded-lg px-2 py-1 hover:bg-opacity-85 w-fit ${
                         session.acceptance_status === 0
@@ -217,7 +209,7 @@ const StaffDash = () => {
                         {session.session_status == 0 ? `` : `Completed`}
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </section>
@@ -228,4 +220,4 @@ const StaffDash = () => {
   );
 };
 
-export default StaffDash;
+export default StaffSessions;
